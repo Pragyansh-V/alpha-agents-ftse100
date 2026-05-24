@@ -22,8 +22,7 @@ Four specialised agents communicate via a Round Robin debate protocol:
 - XAI Auditor — validates rationale fidelity using RAGAS metrics
 
 ## Tech stack
-Python · LangGraph · LangChain · LlamaIndex · ChromaDB · 
-yfinance · RAGAS · Google Colab (GPU)
+Python · LangGraph · LangChain · LlamaIndex · ChromaDB · yfinance · RAGAS · Apple Metal (MPS) & Kaggle (GPU)
 
 ## Key results
 [Add when dissertation is complete]
