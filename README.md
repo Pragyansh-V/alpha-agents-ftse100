@@ -31,4 +31,4 @@ Python · LangGraph · LangChain · LlamaIndex · ChromaDB · yfinance · RAGAS 
 - Cross-market comparison: S&P 500 vs FTSE 100
 
 ## Research report
-[Link to your F21RP report PDF]
+https://docs.google.com/document/d/13BmletwX_GxSQsD1IKuiUpt7nZdTEsFa/edit?usp=sharing&ouid=104789266800738785999&rtpof=true&sd=true
