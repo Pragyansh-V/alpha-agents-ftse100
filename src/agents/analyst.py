@@ -8,8 +8,7 @@ def fundamental_analyst_node(state: AgentState):
     current_round = state.get("debate_round", 1)
     
     print(f"\n[📖 Fundamental Analyst] Round {current_round}: Critiquing metrics for {ticker}...")
-    
-    # 🚨 GROQ ENGINE (No sleep needed, it's instant)
+
     llm = ChatGroq(model_name="llama-3.3-70b-versatile", temperature=0.2)
     
     prompt = ChatPromptTemplate.from_messages([
