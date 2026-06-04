@@ -14,7 +14,7 @@ def quantitative_specialist_node(state: AgentState):
     # 1. Read the current time on the clock
     current_round = state.get("debate_round", 1)
     
-    print(f"\n[🧠 Quant Specialist] Round {current_round}: Executing analysis for {ticker}...")
+    print(f"\n[Quant Specialist] Round {current_round}: Executing analysis for {ticker}...")
     
     end_date = datetime.today()
     start_date = end_date - timedelta(days=365)
@@ -30,7 +30,7 @@ def quantitative_specialist_node(state: AgentState):
         "mean_daily_return": round(float(returns.mean().iloc[0]), 4)
     }
     
-    print(f"[✅ Quant Specialist] Math complete.")
+    print(f"[Quant Specialist] Math complete.")
     
     # 2. Grab the microphone and speak into the debate ledger
     quant_argument = (f"Quant Findings (Round {current_round}):\n"

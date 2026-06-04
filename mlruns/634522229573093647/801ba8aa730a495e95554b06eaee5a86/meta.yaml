@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/pragyansh/GitHub%20Projects/alpha-agents-ftse100/mlruns/634522229573093647/801ba8aa730a495e95554b06eaee5a86/artifacts
+end_time: 1780535734537
+entry_point_name: ''
+experiment_id: '634522229573093647'
+lifecycle_stage: active
+run_id: 801ba8aa730a495e95554b06eaee5a86
+run_name: Baseline_llama-3.3-70b-versatile_T0.0_10Assets
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1780535532876
+status: 3
+tags: []
+user_id: pragyansh

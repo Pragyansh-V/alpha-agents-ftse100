@@ -16,3 +16,4 @@ class AgentState(TypedDict):
     quant_metrics: dict
     portfolio_decision: str
     audit_notes: str
+    rag_context: str

@@ -4,7 +4,7 @@ from src.state import AgentState
 
 def portfolio_manager_node(state: AgentState):
     ticker = state.get("ticker")
-    print(f"\n[👔 Portfolio Manager] Synthesizing final decision for {ticker}...")
+    print(f"\n[Portfolio Manager] Synthesizing final decision for {ticker}...")
     
     llm = ChatGroq(model_name="llama-3.3-70b-versatile", temperature=0.0)
     
@@ -17,5 +17,5 @@ def portfolio_manager_node(state: AgentState):
     response = chain.invoke({"ticker": ticker, "messages": state.get("messages", [])})
     response.content = f"Portfolio Manager: {response.content}"
     
-    print("[✅ Portfolio Manager] Decision finalized.")
+    print("[Portfolio Manager] Decision finalized.")
     return {"messages": [response], "portfolio_decision": response.content}
