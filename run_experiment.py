@@ -55,9 +55,9 @@ def execute_experiment(model_name, temperature, ticker_count, run_name):
 if __name__ == "__main__":
     # Define the parameters for this specific run
     # You will change these variables each time you test a new configuration
-    MODEL = "llama-3.3-70b-versatile"
-    TEMP = 0.0
+    MODEL = "llama-3.1-8b-instant"
+    TEMP = 0.2
     TICKERS = 10
-    RUN_NAME = f"Baseline_{MODEL}_T{TEMP}_{TICKERS}Assets"
+    RUN_NAME = f"Run4_{MODEL}_T{TEMP}_{TICKERS}Assets"
     
     execute_experiment(MODEL, TEMP, TICKERS, RUN_NAME)

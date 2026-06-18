@@ -6,7 +6,7 @@ def portfolio_manager_node(state: AgentState):
     ticker = state.get("ticker")
     print(f"\n[Portfolio Manager] Synthesizing final decision for {ticker}...")
     
-    llm = ChatGroq(model_name="llama-3.3-70b-versatile", temperature=0.0)
+    llm = ChatGroq(model_name="llama-3.3-70b-versatile", temperature=0.2)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", "You are the Lead Portfolio Manager. Review the debate transcript and make a definitive investment decision (BUY/HOLD/SELL) with clear justification."),
