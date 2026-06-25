@@ -36,7 +36,8 @@ def fundamental_analyst_node(state: AgentState):
         retrieved_context = "No external matching reports available due to a system indexing error."
     # -----------------------
 
-    llm = ChatGroq(model_name="llama-3.1-8b-instant", temperature=0.0)
+    # analyst.py / manager.py / auditor.py
+    llm = ChatGroq(model_name="llama-3.1-8b-instant", temperature=0.0, max_retries=6)
     
     # Injecting Grounded Intelligence seamlessly alongside pure numbers
     prompt = ChatPromptTemplate.from_messages([

@@ -6,7 +6,8 @@ def xai_auditor_node(state: AgentState):
     print(f"\n[⚖️ XAI Auditor] Auditing the PM's decision...")
     
     # Model for rigorous compliance checking
-    llm = ChatGroq(model_name="llama-3.1-8b-instant", temperature=0.0)
+    # analyst.py / manager.py / auditor.py
+    llm = ChatGroq(model_name="llama-3.1-8b-instant", temperature=0.0, max_retries=6)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", (
