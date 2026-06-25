@@ -52,5 +52,4 @@ def quantitative_specialist_node(state: AgentState):
     return {
         "quant_metrics": metrics,
         "messages": [new_message],
-        "debate_round": current_round + 1
     }
