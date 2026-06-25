@@ -19,7 +19,6 @@ def execute_experiment(model_name, temperature, ticker_count, run_name):
         
         # 3. Execute the Swarm Pipeline
         print("\n⚙️ Executing Autonomous Swarm...")
-        # Note: In a production environment, you would pass model_name and temp 
         # as arguments to run_swarm.py via argparse. 
         subprocess.run(["python", "run_swarm.py"], check=True)
         
@@ -46,20 +45,19 @@ def execute_experiment(model_name, temperature, ticker_count, run_name):
         # 6. Log Metrics & Artifacts (The "Results")
         mlflow.log_metric("accuracy_percentage", accuracy)
         
-        # Save the actual debate JSON as an artifact so you can read exactly what the AI 
-        # said during this specific run months from now.
+        # Save the actual debate JSON as an artifact so you can read exactly what the AI.
         mlflow.log_artifact("master_debate_results.json")
         mlflow.log_artifact("evaluation_data.csv")
         
         print(f"\n✅ Experiment Logged Successfully. Accuracy: {accuracy}%")
 
 if __name__ == "__main__":
-    MODEL = "llama-3.1-8b-instant"
+    MODEL = "llama-3.3-70b-versatile"  # Change this to your desired model
     TEMP = 0.2
     TICKERS = 10
 
     os.environ["EXPERIMENT_MODEL"] = MODEL
     os.environ["EXPERIMENT_TEMP"] = str(TEMP)
 
-    RUN_NAME = f"Run4_{MODEL}_T{TEMP}_{TICKERS}Assets"
+    RUN_NAME = f"Run1_{MODEL}_T{TEMP}_{TICKERS}Assets"
     execute_experiment(MODEL, TEMP, TICKERS, RUN_NAME)
