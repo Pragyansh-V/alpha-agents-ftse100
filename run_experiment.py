@@ -1,6 +1,7 @@
 import mlflow
 import subprocess
 import json
+import os
 
 def execute_experiment(model_name, temperature, ticker_count, run_name):
     print(f"🚀 Starting Experiment: {run_name}")
@@ -53,11 +54,12 @@ def execute_experiment(model_name, temperature, ticker_count, run_name):
         print(f"\n✅ Experiment Logged Successfully. Accuracy: {accuracy}%")
 
 if __name__ == "__main__":
-    # Define the parameters for this specific run
-    # You will change these variables each time you test a new configuration
     MODEL = "llama-3.1-8b-instant"
-    TEMP = 0.0
+    TEMP = 0.2
     TICKERS = 10
-    RUN_NAME = f"Run4_Clean_{MODEL}_T{TEMP}_{TICKERS}Assets"
-    
+
+    os.environ["EXPERIMENT_MODEL"] = MODEL
+    os.environ["EXPERIMENT_TEMP"] = str(TEMP)
+
+    RUN_NAME = f"Run4_{MODEL}_T{TEMP}_{TICKERS}Assets"
     execute_experiment(MODEL, TEMP, TICKERS, RUN_NAME)

@@ -1,3 +1,5 @@
+import os
+
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from src.state import AgentState
@@ -7,7 +9,9 @@ def xai_auditor_node(state: AgentState):
     
     # Model for rigorous compliance checking
     # analyst.py / manager.py / auditor.py
-    llm = ChatGroq(model_name="llama-3.1-8b-instant", temperature=0.0, max_retries=6)
+    llm = ChatGroq(model_name=os.environ.get("EXPERIMENT_MODEL", "llama-3.1-8b-instant"),
+        temperature=float(os.environ.get("EXPERIMENT_TEMP", "0.0")),
+        max_retries=6)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", (
