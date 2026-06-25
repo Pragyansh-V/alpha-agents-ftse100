@@ -2,3 +2,7 @@
 venv/
 __pycache__/
 *.json
+faiss_index/
+mlruns/
+outputs/
+

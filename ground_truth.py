@@ -1,114 +1,83 @@
-import pandas as pd
+import json
 import yfinance as yf
-import time
+import pandas as pd
+import re
 
-# --- CONFIGURATION ---
-INPUT_CSV = "evaluation_data.csv"
-OUTPUT_CSV = "ground_truth_results.csv"
-
-# The historical window to evaluate the Swarm's decisions against
-# (e.g., Evaluate Q1 2024 performance)
-START_DATE = "2025-01-01"
-END_DATE = "2025-07-01"
-
-def fetch_actual_return(ticker):
-    """Fetches historical data and calculates the % return over the period."""
-    try:
-        stock = yf.download(ticker, start=START_DATE, end=END_DATE, progress=False)
-        if stock.empty:
-            return None
-        
-        # Get opening price on start date and closing price on end date
-        open_price = float(stock['Open'].iloc[0])
-        close_price = float(stock['Close'].iloc[-1])
-        
-        percent_return = ((close_price - open_price) / open_price) * 100
-        return round(percent_return, 2)
-    except Exception as e:
-        print(f"Error fetching data for {ticker}: {e}")
-        return None
-
-def grade_decision(pm_decision, actual_return):
-    """Grades the PM's decision against the actual market outcome."""
-    if actual_return is None:
-        return "ERROR"
-        
-    actual_direction = "UP" if actual_return > 0 else "DOWN"
+def evaluate_swarm():
+    print("📊 Initializing JSON Ground Truth Evaluation Engine...")
     
-    # Ignore HOLDs for pure binary accuracy metrics
-    if pm_decision == "HOLD":
-        return "NEUTRAL"
-        
-    if pm_decision == "BUY" and actual_direction == "UP":
-        return "TRUE POSITIVE (WIN)"
-    elif pm_decision == "SELL" and actual_direction == "DOWN":
-        return "TRUE NEGATIVE (WIN)"
-    elif pm_decision == "BUY" and actual_direction == "DOWN":
-        return "FALSE POSITIVE (LOSS)"
-    elif pm_decision == "SELL" and actual_direction == "UP":
-        return "FALSE NEGATIVE (LOSS)"
-    
-    return "UNKNOWN"
-
-def run_evaluation():
-    print(f"📊 Loading {INPUT_CSV}...")
+    # 1. Load the Swarm's autonomous decisions
     try:
-        df = pd.read_csv(INPUT_CSV)
+        with open('master_debate_results.json', 'r') as f:
+            data = json.load(f)
     except FileNotFoundError:
-        print(f"❌ Could not find {INPUT_CSV}. Run backtest.py first.")
+        print("❌ master_debate_results.json not found. Run the Swarm first.")
         return
-
-    print(f"📈 Fetching historical market data from {START_DATE} to {END_DATE}...\n")
-    
+        
     results = []
-    wins = 0
-    losses = 0
+    correct_predictions = 0
     
-    for index, row in df.iterrows():
-        ticker = row['Ticker']
-        pm_decision = row['PM_Decision']
+    for asset in data:
+        ticker = asset['ticker']
         
-        print(f"Evaluating {ticker}... (Swarm said: {pm_decision})")
-        actual_return = fetch_actual_return(ticker)
+        # Extract the exact SELL/HOLD/BUY decision using the new strict token
+        pm_text = asset.get('portfolio_decision', '')
         
-        if actual_return is not None:
-            grade = grade_decision(pm_decision, actual_return)
+        # Updated Regex: ONLY looks for the exact FINAL_DECISION anchor
+        match = re.search(r'FINAL_DECISION:\s*(BUY|HOLD|SELL)', pm_text, re.IGNORECASE)
+        
+        if not match:
+            print(f"⚠️ Could not parse strict decision for {ticker}")
+            continue
             
-            if "WIN" in grade:
-                wins += 1
-            elif "LOSS" in grade:
-                losses += 1
+        ai_decision = match.group(1).upper()
+        
+        # 2. Fetch the Ground Truth (Actual Market Data for the last 3 months)
+        try:
+            stock = yf.Ticker(ticker)
+            # Fetching historical data
+            hist_data = stock.history(period="3mo").dropna(subset=['Close'])
+            
+            if hist_data.empty:
+                print(f"⚠️ No market data found for {ticker}")
+                continue
+                
+            start_price = float(hist_data['Close'].iloc[0])
+            end_price = float(hist_data['Close'].iloc[-1])
+            actual_return = (end_price - start_price) / start_price
+            
+            # Determine true optimal action based on a 5% threshold
+            if actual_return > 0.05:
+                ground_truth = "BUY"
+            elif actual_return < -0.05:
+                ground_truth = "SELL"
+            else:
+                ground_truth = "HOLD"
+                
+            # 3. Grade the AI
+            is_correct = (ai_decision == ground_truth)
+            if is_correct:
+                correct_predictions += 1
                 
             results.append({
                 "Ticker": ticker,
-                "Swarm_Decision": pm_decision,
-                "Actual_Return_%": actual_return,
-                "Grade": grade
+                "Swarm_Decision": ai_decision,
+                "Actual_Market": ground_truth,
+                "Actual_Return_%": f"{actual_return * 100:.2f}%",
+                "Graded_Result": "✅ PASS" if is_correct else "❌ FAIL"
             })
-            print(f"   -> Actual Return: {actual_return}% | Grade: {grade}")
-        else:
-            print(f"   -> Failed to fetch market data.")
             
-        time.sleep(1) # Pacemaker for Yahoo Finance
+        except Exception as e:
+            print(f"⚠️ Failed to evaluate {ticker}: {e}")
 
-    # Save final results
-    results_df = pd.DataFrame(results)
-    results_df.to_csv(OUTPUT_CSV, index=False)
+    # 4. Calculate and display final metrics
+    total = len(results)
+    accuracy = (correct_predictions / total) * 100 if total > 0 else 0
     
-    # Calculate Academic Metrics
-    total_actionable = wins + losses
-    accuracy = (wins / total_actionable * 100) if total_actionable > 0 else 0
-    
-    print("\n========================================")
-    print("🎓 DISSERTATION EVALUATION SUMMARY 🎓")
-    print("========================================")
-    print(f"Total Tickers Evaluated: {len(results_df)}")
-    print(f"Total Actionable Decisions (Buy/Sell): {total_actionable}")
-    print(f"Total Wins (Correct Predictions): {wins}")
-    print(f"Total Losses (Incorrect Predictions): {losses}")
-    print(f"Swarm Accuracy Rate: {round(accuracy, 2)}%")
-    print(f"Detailed ledger saved to: {OUTPUT_CSV}")
-    print("========================================\n")
+    print("\n🏆 --- DISSERTATION EVALUATION SUMMARY --- 🏆\n")
+    df = pd.DataFrame(results)
+    print(df.to_string(index=False))
+    print(f"\n🧠 Final Swarm Predictive Accuracy: {accuracy:.2f}%\n")
 
 if __name__ == "__main__":
-    run_evaluation()
+    evaluate_swarm()

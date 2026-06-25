@@ -6,41 +6,47 @@ from src.state import AgentState
 
 def quantitative_specialist_node(state: AgentState):
     """
-    The Quant Agent: Fetches data, updates the strict dictionary, 
+    The Quant Agent: Fetches data, calculates TRUE mathematical risk, 
     AND posts its findings to the debate ledger.
     """
     ticker = state["ticker"]
-    
-    # 1. Read the current time on the clock
     current_round = state.get("debate_round", 1)
     
-    print(f"\n[🧠 Quant Specialist] Round {current_round}: Executing analysis for {ticker}...")
+    print(f"\n[Quant Specialist] Round {current_round}: Executing analysis for {ticker}...")
     
     end_date = datetime.today()
     start_date = end_date - timedelta(days=365)
     
-    raw_data = yf.download([ticker], start=start_date, end=end_date)
+    raw_data = yf.download([ticker], start=start_date, end=end_date, progress=False)
     prices = raw_data['Adj Close'] if 'Adj Close' in raw_data.columns else raw_data['Close']
         
     returns = prices.pct_change().dropna()
     
+    # --- TRUE MAX DRAWDOWN CALCULATION ---
+    # 1. Calculate cumulative portfolio value over the year
+    cumulative_returns = (1 + returns).cumprod()
+    # 2. Track the highest peak reached at any given point
+    rolling_peak = cumulative_returns.cummax()
+    # 3. Calculate the percentage drop from the peak
+    drawdowns = (cumulative_returns - rolling_peak) / rolling_peak
+    true_max_drawdown = drawdowns.min()
+    # -------------------------------------
+    
     metrics = {
         "volatility": round(float(returns.std().iloc[0]), 4),
-        "max_drawdown_daily": round(float(returns.min().iloc[0]), 4),
+        "max_drawdown": round(float(true_max_drawdown.iloc[0]), 4),
         "mean_daily_return": round(float(returns.mean().iloc[0]), 4)
     }
     
-    print(f"[✅ Quant Specialist] Math complete.")
+    print(f"[Quant Specialist] Math complete.")
     
-    # 2. Grab the microphone and speak into the debate ledger
     quant_argument = (f"Quant Findings (Round {current_round}):\n"
-                      f"Volatility: {metrics['volatility']}\n"
-                      f"Max Drawdown: {metrics['max_drawdown_daily']}\n"
-                      f"Mean Return: {metrics['mean_daily_return']}")
+                      f"Volatility (Daily Std Dev): {metrics['volatility']}\n"
+                      f"True Max Drawdown (Peak-to-Trough): {metrics['max_drawdown']}\n"
+                      f"Mean Daily Return: {metrics['mean_daily_return']}")
     
     new_message = AIMessage(content=quant_argument)
     
-    # 3. Return the dictionary, append the message, and advance the clock!
     return {
         "quant_metrics": metrics,
         "messages": [new_message],

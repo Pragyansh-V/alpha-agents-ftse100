@@ -79,7 +79,7 @@ if __name__ == "__main__":
     final_state = alpha_agents_app.invoke(initial_state)
     
     # --- Serialization and Caching Logic ---
-    print("\n[💾 Cache] Serializing data for frontend...")
+    print("\n[Cache] Serializing data for frontend...")
     
     # Extract raw text from LangChain message objects
     serialized_messages = []
@@ -95,13 +95,13 @@ if __name__ == "__main__":
     output_cache = {
         "ticker": final_state["ticker"],
         "quant_metrics": final_state["quant_metrics"],
+        "rag_context": final_state.get("rag_context", "No external context retrieved."), # <-- ADD THIS LINE
         "portfolio_decision": final_state["portfolio_decision"],
         "audit_notes": final_state["audit_notes"],
         "messages": serialized_messages
     }
-
     # Save to a local JSON file
     with open("debate_results.json", "w") as f:
         json.dump(output_cache, f, indent=4)
         
-    print("[✅ Cache] Debate saved to debate_results.json. The UI is ready.")
+    print("[Cache] Debate saved to debate_results.json. The UI is ready.")
