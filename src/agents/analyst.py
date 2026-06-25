@@ -1,9 +1,10 @@
 import os
+from langchain_core.messages import AIMessage
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from src.state import AgentState
 
-# Core RAG Imports (Fixed typo)
+# Core RAG Imports
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
@@ -20,8 +21,8 @@ def fundamental_analyst_node(state: AgentState):
         embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
         vector_db = FAISS.load_local("./faiss_index", embeddings, allow_dangerous_deserialization=True)
         
-        # Pull the top relevant chunk for this ticker
-        retrieved_docs = vector_db.similarity_search(f"Macroeconomic data and risks for {ticker}", k=1)
+        # Exact string matching query to prevent ticker collision (e.g., RR.L vs REL.L)
+        retrieved_docs = vector_db.similarity_search(f"Ticker: {ticker} | Sector:", k=1)
         
         if retrieved_docs:
             retrieved_context = retrieved_docs[0].page_content
@@ -35,9 +36,9 @@ def fundamental_analyst_node(state: AgentState):
         retrieved_context = "No external matching reports available due to a system indexing error."
     # -----------------------
 
-    llm = ChatGroq(model_name="llama-3.3-70b-versatile", temperature=0.2)
+    llm = ChatGroq(model_name="llama-3.1-8b-instant", temperature=0.0)
     
-    # Updated to inject Grounded Intelligence seamlessly alongside pure numbers
+    # Injecting Grounded Intelligence seamlessly alongside pure numbers
     prompt = ChatPromptTemplate.from_messages([
         (
             "system", 
@@ -55,7 +56,6 @@ def fundamental_analyst_node(state: AgentState):
     
     chain = prompt | llm
     
-    # Fed the new variable directly into the execution chain
     response = chain.invoke({
         "ticker": ticker, 
         "quant": quant_data, 
@@ -63,7 +63,13 @@ def fundamental_analyst_node(state: AgentState):
         "messages": state.get("messages", [])
     })
     
-    response.content = f"Fundamental Analyst: {response.content}"
+    # Safely create a new message object instead of mutating the old one to prevent LangChain serialization warnings
+    safe_message = AIMessage(content=f"Fundamental Analyst: {response.content}")
     
     print("[✅ Fundamental Analyst] Critique complete.")
-    return {"messages": [response], "fundamental_analysis": response.content, "debate_round": current_round + 1, "rag_context": retrieved_context}
+    return {
+        "messages": [safe_message], 
+        "fundamental_analysis": safe_message.content, 
+        "debate_round": current_round + 1, 
+        "rag_context": retrieved_context
+    }

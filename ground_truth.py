@@ -1,5 +1,4 @@
 import json
-from matplotlib.pyplot import hist
 import yfinance as yf
 import pandas as pd
 import re
@@ -21,9 +20,11 @@ def evaluate_swarm():
     for asset in data:
         ticker = asset['ticker']
         
-        # Extract the SELL/HOLD/BUY decision using Regex
+        # Extract the exact SELL/HOLD/BUY decision using the new strict token
         pm_text = asset.get('portfolio_decision', '')
-        match = re.search(r'(?:Investment Decision|Decision|Recommendation)[^a-zA-Z]*(BUY|HOLD|SELL)', pm_text, re.IGNORECASE)
+        
+        # Updated Regex: ONLY looks for the exact FINAL_DECISION anchor
+        match = re.search(r'FINAL_DECISION:\s*(BUY|HOLD|SELL)', pm_text, re.IGNORECASE)
         
         if not match:
             print(f"⚠️ Could not parse strict decision for {ticker}")
@@ -34,15 +35,15 @@ def evaluate_swarm():
         # 2. Fetch the Ground Truth (Actual Market Data for the last 3 months)
         try:
             stock = yf.Ticker(ticker)
-            hist = stock.history(period="3mo").dropna(subset=['Close'])
-
+            # Fetching historical data
+            hist_data = stock.history(period="3mo").dropna(subset=['Close'])
             
-            if hist.empty:
+            if hist_data.empty:
                 print(f"⚠️ No market data found for {ticker}")
                 continue
                 
-            start_price = float(hist['Close'].iloc[0])
-            end_price = float(hist['Close'].iloc[-1])
+            start_price = float(hist_data['Close'].iloc[0])
+            end_price = float(hist_data['Close'].iloc[-1])
             actual_return = (end_price - start_price) / start_price
             
             # Determine true optimal action based on a 5% threshold
