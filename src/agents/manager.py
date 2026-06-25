@@ -7,7 +7,8 @@ def portfolio_manager_node(state: AgentState):
     print(f"\n[Portfolio Manager] Synthesizing final decision for {ticker}...")
     
     # Model configured for the baseline
-    llm = ChatGroq(model_name="llama-3.1-8b-instant", temperature=0.0)
+    # analyst.py / manager.py / auditor.py
+    llm = ChatGroq(model_name="llama-3.1-8b-instant", temperature=0.0, max_retries=6)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", (

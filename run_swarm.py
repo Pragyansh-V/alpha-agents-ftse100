@@ -1,3 +1,4 @@
+import time
 import os
 import json
 import pandas as pd
@@ -67,6 +68,8 @@ def run_batch_pipeline():
         except Exception as e:
             print(f"❌ Failed to process {ticker} due to execution runtime error: {e}")
             continue
+        finally:
+            time.sleep(2)  # spread token usage across the rolling 60s window
 
     # 3. Save the master array to disk
     with open(OUTPUT_JSON, "w") as f:
