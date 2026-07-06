@@ -2,16 +2,19 @@ import json
 import yfinance as yf
 import pandas as pd
 import re
+import os
 
 def evaluate_swarm():
     print("📊 Initializing JSON Ground Truth Evaluation Engine...")
     
     # 1. Load the Swarm's autonomous decisions
     try:
-        with open('master_debate_results.json', 'r') as f:
+        run_name = os.environ.get("RUN_NAME", "default_run")
+        results_path = f"results/{run_name}.json"
+        with open(results_path, 'r') as f:
             data = json.load(f)
     except FileNotFoundError:
-        print("❌ master_debate_results.json not found. Run the Swarm first.")
+        print(f"❌ {results_path} not found. Run the Swarm first.")
         return
         
     results = []
