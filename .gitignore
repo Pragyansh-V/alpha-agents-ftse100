@@ -1,6 +1,7 @@
 .env
 venv/
 __pycache__/
+*.json 
 !results/*.json
 faiss_index/
 mlruns/
