@@ -1,6 +1,6 @@
 import os
 
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from src.state import AgentState
 
@@ -10,11 +10,9 @@ def portfolio_manager_node(state: AgentState):
     
     # Model configured for the baseline
     # analyst.py / manager.py / auditor.py
-    llm = ChatOpenAI(
-        model=os.environ.get("EXPERIMENT_MODEL", "meta/llama-3.3-70b-instruct"),
-        temperature=float(os.environ.get("EXPERIMENT_TEMP", "0.2")),
-        openai_api_key=os.environ.get("NVIDIA_API_KEY"),
-        openai_api_base="https://integrate.api.nvidia.com/v1",
+    llm = ChatGroq(
+        model_name=os.environ.get("EXPERIMENT_MODEL", "llama-3.1-8b-instant"),
+        temperature=float(os.environ.get("EXPERIMENT_TEMP", "0.0")),
         max_retries=6
     )
 
