@@ -45,8 +45,8 @@ def execute_experiment(model_name, temperature, ticker_count, run_name):
         # 6. Log Metrics & Artifacts (The "Results")
         mlflow.log_metric("accuracy_percentage", accuracy)
         
-        # Save the actual debate JSON as an artifact so you can read exactly what the AI.
-        mlflow.log_artifact("master_debate_results.json")
+        # Save the actual debate JSON as an artifact.
+        mlflow.log_artifact(f"results/{run_name}.json")
         mlflow.log_artifact("evaluation_data.csv")
         
         print(f"\n✅ Experiment Logged Successfully. Accuracy: {accuracy}%")
@@ -59,5 +59,7 @@ if __name__ == "__main__":
     os.environ["EXPERIMENT_MODEL"] = MODEL
     os.environ["EXPERIMENT_TEMP"] = str(TEMP)
 
-    RUN_NAME = f"Run4_{MODEL.split('/')[1]}_T{TEMP}_{TICKERS}Assets"
+
+    RUN_NAME = f"Run4_{MODEL}_T{TEMP}_{TICKERS}Assets"
+    os.environ["RUN_NAME"] = RUN_NAME
     execute_experiment(MODEL, TEMP, TICKERS, RUN_NAME)

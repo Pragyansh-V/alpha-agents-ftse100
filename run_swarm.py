@@ -8,7 +8,9 @@ from graph import alpha_agents_app
 load_dotenv()
 
 INPUT_CSV = "evaluation_data.csv"
-OUTPUT_JSON = "master_debate_results.json"
+RUN_NAME = os.environ.get("RUN_NAME", "default_run")
+OUTPUT_JSON = f"results/{RUN_NAME}.json"
+os.makedirs("results", exist_ok=True)
 
 def run_batch_pipeline():
     # 1. Load your evaluation dataset to pull the tickers
