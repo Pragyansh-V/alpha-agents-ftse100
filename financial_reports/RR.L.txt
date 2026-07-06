@@ -1,2 +1,30 @@
 Company Name: Rolls-Royce Holdings plc | Ticker: RR.L | Sector: Industrials | Industry: Aerospace & Defense
-Macroeconomic data and risks for RR.L | Rolls-Royce Holdings plc designs and manages mission-critical power systems in the United Kingdom and internationally. The company operates through three segments: Civil Aerospace, Defence, and Power Systems. The Civil Aerospace segment develops, manufactures, markets, and sells aero engines for large commercial aircraft, regional jet, and business aviation markets, as well as provides aftermarket services. The Defence segment is involved in the development, manufacture, marketing, and sale of military aero engines, naval engines, and submarine nuclear power plants, as well as offers aftermarket services. The Power Systems segment engages in the development, manufacture, marketing, and sale of integrated solutions for onsite power and propulsion under the mtu brand name. Rolls-Royce Holdings plc was founded in 1884 and is headquartered in London, the United Kingdom.
+
+BUSINESS OVERVIEW:
+Rolls-Royce Holdings plc designs and manages mission-critical power systems in the United Kingdom and internationally. The company operates through three segments: Civil Aerospace, Defence, and Power Systems. The Civil Aerospace segment develops, manufactures, markets, and sells aero engines for large commercial aircraft, regional jet, and business aviation markets, as well as provides aftermarket services. The Defence segment is involved in the development, manufacture, marketing, and sale of military aero engines, naval engines, and submarine nuclear power plants, as well as offers aftermarket services. The Power Systems segment engages in the development, manufacture, marketing, and sale of integrated solutions for onsite power and propulsion under the mtu brand name. Rolls-Royce Holdings plc was founded in 1884 and is headquartered in London, the United Kingdom.
+
+VALUATION METRICS:
+- Market Cap: 123.74B
+- Trailing P/E: 21.64 | Forward P/E: 34.45
+- Price-to-Book: 45.80
+- EV/EBITDA: 27.00
+
+FINANCIAL HEALTH:
+- Total Revenue: 21.21B
+- Revenue Growth (YoY): 0.17%
+- Gross Margin: 27.87% | Operating Margin: 20.33% | Profit Margin: 27.54%
+- Debt-to-Equity: 158.44
+- Current Ratio: 1.20
+- Free Cash Flow: 3.59B
+
+EARNINGS & GROWTH:
+- EPS (Trailing): 0.69 | EPS (Forward): 0.43
+- Earnings Growth: 4.10%
+- Return on Equity: 623.50%
+
+MARKET PERFORMANCE:
+- Current Price: 1,493.00
+- 52-Week Range: 959.40 - 1,532.60
+- Analyst Mean Target: 1,431.50
+- Analyst Consensus: BUY (20 analysts)
+- Dividend Yield: 63.00%

@@ -1,2 +1,30 @@
 Company Name: InterContinental Hotels Group PLC | Ticker: IHG.L | Sector: Consumer Cyclical | Industry: Lodging
-Macroeconomic data and risks for IHG.L | InterContinental Hotels Group PLC owns, manages, franchises, and leases hotels in the United Kingdom, the United States, and internationally. It operates hotels under the Six Senses, Regent, InterContinental Hotels & Resorts, Vignette Collection, Kimpton Hotel, Hotel Indigo, voco, Ruby, HUALUXE, Crowne Plaza, Iberostar Beachfront Resorts, EVEN Hotels, Holiday Inn Express, Holiday Inn, Garner, avid hotels, Atwell Suites, Staybridge Suites, IHG, Holiday Inn Club Vacations, and Candlewood Suites brand names. The company also provides IHG Rewards loyalty program. InterContinental Hotels Group PLC was formerly known as Six Continents PLC and changed its name to InterContinental Hotels Group PLC in June 2003. The company was founded in 1777 and is headquartered in Windsor, United Kingdom.
+
+BUSINESS OVERVIEW:
+InterContinental Hotels Group PLC owns, manages, franchises, and leases hotels in the United Kingdom, the United States, and internationally. It operates hotels under the Six Senses, Regent, InterContinental Hotels & Resorts, Vignette Collection, Kimpton Hotel, Hotel Indigo, voco, Ruby, HUALUXE, Crowne Plaza, Iberostar Beachfront Resorts, EVEN Hotels, Holiday Inn Express, Holiday Inn, Garner, avid hotels, Atwell Suites, Staybridge Suites, IHG, Holiday Inn Club Vacations, and Candlewood Suites brand names. The company also provides IHG Rewards loyalty program. InterContinental Hotels Group PLC was formerly known as Six Continents PLC and changed its name to InterContinental Hotels Group PLC in June 2003. The company was founded in 1777 and is headquartered in Windsor, United Kingdom.
+
+VALUATION METRICS:
+- Market Cap: 24.43B
+- Trailing P/E: 33.99 | Forward P/E: 25.57
+- Price-to-Book: -9.09
+- EV/EBITDA: 23.10
+
+FINANCIAL HEALTH:
+- Total Revenue: 5.19B
+- Revenue Growth (YoY): 0.03%
+- Gross Margin: 61.94% | Operating Margin: 22.21% | Profit Margin: 14.61%
+- Debt-to-Equity: N/A
+- Current Ratio: 0.98
+- Free Cash Flow: 0.68B
+
+EARNINGS & GROWTH:
+- EPS (Trailing): 4.86 | EPS (Forward): 6.46
+- Earnings Growth: 7.70%
+- Return on Equity: N/A
+
+MARKET PERFORMANCE:
+- Current Price: 165.20
+- 52-Week Range: 113.84 - 175.70
+- Analyst Mean Target: 159.13
+- Analyst Consensus: HOLD (16 analysts)
+- Dividend Yield: 110.00%

@@ -1,2 +1,30 @@
 Company Name: Anglo American plc | Ticker: AAL.L | Sector: Basic Materials | Industry: Other Industrial Metals & Mining
-Macroeconomic data and risks for AAL.L | Anglo American plc, a mining company, produces copper, iron ore, and crop nutrients in the United Kingdom and internationally. The company operates through the Premium Iron Ore and the Copper segments. It also explores for nickel, diamonds, steelmaking coal, and manganese ore. The company was founded in 1917 and is headquartered in London, the United Kingdom.
+
+BUSINESS OVERVIEW:
+Anglo American plc, a mining company, produces copper, iron ore, and crop nutrients in the United Kingdom and internationally. The company operates through the Premium Iron Ore and the Copper segments. It also explores for nickel, diamonds, steelmaking coal, and manganese ore. The company was founded in 1917 and is headquartered in London, the United Kingdom.
+
+VALUATION METRICS:
+- Market Cap: 40.44B
+- Trailing P/E: N/A | Forward P/E: 20.98
+- Price-to-Book: 2.97
+- EV/EBITDA: 9.38
+
+FINANCIAL HEALTH:
+- Total Revenue: 18.55B
+- Revenue Growth (YoY): 0.17%
+- Gross Margin: 63.08% | Operating Margin: 22.06% | Profit Margin: -20.17%
+- Debt-to-Equity: 65.51
+- Current Ratio: 2.65
+- Free Cash Flow: -0.59B
+
+EARNINGS & GROWTH:
+- EPS (Trailing): -0.79 | EPS (Forward): 1.80
+- Earnings Growth: N/A
+- Return on Equity: -2.67%
+
+MARKET PERFORMANCE:
+- Current Price: 3,774.00
+- 52-Week Range: 2,042.00 - 4,239.00
+- Analyst Mean Target: 3,897.83
+- Analyst Consensus: BUY (16 analysts)
+- Dividend Yield: 45.00%

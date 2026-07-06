@@ -1,2 +1,30 @@
 Company Name: BAE Systems plc | Ticker: BA.L | Sector: Industrials | Industry: Aerospace & Defense
-Macroeconomic data and risks for BA.L | BAE Systems plc provides defense, aerospace, and security solutions in the United States, the United Kingdom, the Middle East, Australia, Kingdom of Saudi Arabia, Europe, and internationally. The company operates through five segments: Electronic Systems, Platforms & Services, Air, Maritime, and Cyber & Intelligence. The Electronic Systems segment offers electronic warfare systems, navigation systems, electro-optical sensors, military and commercial avionics, and precision guided solutions and communications systems, as well as space electronics, spacecraft, and ground and tactical systems. The Platforms & Services segment manufactures and sells combat vehicles, weapons, and munitions; and offers naval ship repair services, as well as operates and manages two government-owned and contractor-operated ammunition plants. The Air segment develops future combat air systems and falconworks alongside edgewing, and eurofighter and MBDA. The Maritime segment provides maritime and land services, including submarine, ship build, and support programs. The Cyber & Intelligence segment offers cyber security services for national security, central government, and government enterprises. The company was formerly known as British Aerospace plc and changed its name to BAE Systems plc in May 2000. BAE Systems plc was incorporated in 1979 and is headquartered in London, the United Kingdom.
+
+BUSINESS OVERVIEW:
+BAE Systems plc provides defense, aerospace, and security solutions in the United States, the United Kingdom, the Middle East, Australia, Kingdom of Saudi Arabia, Europe, and internationally. The company operates through five segments: Electronic Systems, Platforms & Services, Air, Maritime, and Cyber & Intelligence. The Electronic Systems segment offers electronic warfare systems, navigation systems, electro-optical sensors, military and commercial avionics, and precision guided solutions and communications systems, as well as space electronics, spacecraft, and ground and tactical systems. The Platforms & Services segment manufactures and sells combat vehicles, weapons, and munitions; and offers naval ship repair services, as well as operates and manages two government-owned and contractor-operated ammunition plants. The Air segment develops future combat air systems and falconworks alongside edgewing, and eurofighter and MBDA. The Maritime segment provides maritime and land services, including submarine, ship build, and support programs. The Cyber & Intelligence segment offers cyber security services for national security, central government, and government enterprises. The company was formerly known as British Aerospace plc and changed its name to BAE Systems plc in May 2000. BAE Systems plc was incorporated in 1979 and is headquartered in London, the United Kingdom.
+
+VALUATION METRICS:
+- Market Cap: 59.23B
+- Trailing P/E: 29.71 | Forward P/E: 21.34
+- Price-to-Book: 5.13
+- EV/EBITDA: 18.16
+
+FINANCIAL HEALTH:
+- Total Revenue: 28.34B
+- Revenue Growth (YoY): 0.07%
+- Gross Margin: 13.21% | Operating Margin: 10.15% | Profit Margin: 7.28%
+- Debt-to-Equity: 76.73
+- Current Ratio: 0.99
+- Free Cash Flow: 1.78B
+
+EARNINGS & GROWTH:
+- EPS (Trailing): 0.68 | EPS (Forward): 0.95
+- Earnings Growth: 8.70%
+- Return on Equity: 18.14%
+
+MARKET PERFORMANCE:
+- Current Price: 2,020.00
+- 52-Week Range: 1,529.00 - 2,360.00
+- Analyst Mean Target: 2,304.89
+- Analyst Consensus: BUY (18 analysts)
+- Dividend Yield: 183.00%

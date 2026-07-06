@@ -1,2 +1,30 @@
 Company Name: Tesco PLC | Ticker: TSCO.L | Sector: Consumer Defensive | Industry: Grocery Stores
-Macroeconomic data and risks for TSCO.L | Tesco PLC, together with its subsidiaries, operates as a grocery retailer in the United Kingdom, Republic of Ireland, the Czech Republic, Slovakia, and Hungary. The company offers grocery products through its stores, as well as online. It is also involved in the food and drink wholesaling activities. In addition, the company provides mobile virtual network operating services, as well as insurance products, such as for home, travel, pet, and car insurance products. Further, the company operates a network of convenience stores; and offers AI-enabled science, software, and trusted advice; and consultancy services. Tesco PLC was founded in 1919 and is based in Welwyn Garden City, the United Kingdom.
+
+BUSINESS OVERVIEW:
+Tesco PLC, together with its subsidiaries, operates as a grocery retailer in the United Kingdom, Republic of Ireland, the Czech Republic, Slovakia, and Hungary. The company offers grocery products through its stores, as well as online. It is also involved in the food and drink wholesaling activities. In addition, the company provides mobile virtual network operating services, as well as insurance products, such as for home, travel, pet, and car insurance products. Further, the company operates a network of convenience stores; and offers AI-enabled science, software, and trusted advice; and consultancy services. Tesco PLC was founded in 1919 and is based in Welwyn Garden City, the United Kingdom.
+
+VALUATION METRICS:
+- Market Cap: 28.88B
+- Trailing P/E: 17.16 | Forward P/E: 13.81
+- Price-to-Book: 2.57
+- EV/EBITDA: 9.22
+
+FINANCIAL HEALTH:
+- Total Revenue: 73.71B
+- Revenue Growth (YoY): 0.07%
+- Gross Margin: 7.63% | Operating Margin: 3.97% | Profit Margin: 2.42%
+- Debt-to-Equity: 131.62
+- Current Ratio: 0.59
+- Free Cash Flow: 2.25B
+
+EARNINGS & GROWTH:
+- EPS (Trailing): 0.27 | EPS (Forward): 0.34
+- Earnings Growth: 53.70%
+- Return on Equity: 15.46%
+
+MARKET PERFORMANCE:
+- Current Price: 463.40
+- 52-Week Range: 397.50 - 510.40
+- Analyst Mean Target: 513.67
+- Analyst Consensus: BUY (15 analysts)
+- Dividend Yield: 311.00%
