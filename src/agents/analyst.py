@@ -51,9 +51,15 @@ def fundamental_analyst_node(state: AgentState):
     max_retries=6
     )
 
+    
     # Injecting Grounded Intelligence seamlessly alongside pure numbers
-    prompt = ChatPromptTemplate.from_messages([
-        (
+    if current_round == 2:
+        system_prompt = (
+            "You are a DEVIL'S ADVOCATE analyst. Your job is to CHALLENGE the previous round's analysis. Identify every weakness, every risk that was understated, every bullish assumption that could be wrong. Force the Portfolio Manager to defend their thesis against your strongest objection."
+        )
+    else:
+        prompt = ChatPromptTemplate.from_messages([
+            (
             "system",
             "You are an expert Fundamental Analyst at a hedge fund. Critique the quantitative metrics "
             "provided, factoring in specific macroeconomic conditions and corporate intelligence."

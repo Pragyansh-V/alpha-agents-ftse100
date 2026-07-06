@@ -25,6 +25,7 @@ def portfolio_manager_node(state: AgentState):
             "2. You must break ties dynamically. Do not default to HOLD out of caution unless the data is explicitly neutral.\n"
             "3. Finally, on a new line at the very bottom of your response, output your definitive token action exactly like this:\n"
             "FINAL_DECISION: [BUY, HOLD, or SELL]"
+            "CRITICAL: A HOLD decision requires explicit justification that the stock is genuinely range-bound. If quant data shows momentum in either direction AND fundamental data confirms it, you MUST commit to BUY or SELL. Uncertainty alone is NOT grounds for HOLD."
         )),
         ("human", "Ticker: {ticker}\nDebate Transcript: {messages}")
     ])
