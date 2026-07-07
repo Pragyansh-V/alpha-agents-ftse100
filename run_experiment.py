@@ -48,6 +48,11 @@ def execute_experiment(model_name, temperature, ticker_count, run_name):
         # Save the actual debate JSON as an artifact.
         mlflow.log_artifact(f"results/{run_name}.json")
         mlflow.log_artifact("evaluation_data.csv")
+
+        # 7. Execute Portfolio Backtest (Sharpe, MDD, vs Buy-and-Hold)
+        print("\n📈 Executing Portfolio Backtest...")
+        subprocess.run(["python", "backtest.py"], check=True)
+        mlflow.log_artifact(f"results/{run_name}_backtest.json")
         
         print(f"\n✅ Experiment Logged Successfully. Accuracy: {accuracy}%")
 
