@@ -68,12 +68,19 @@ def quantitative_specialist_node(state: AgentState):
 
     print(f"[Quant Specialist] Math complete.")
 
-    # Interpret momentum signals in plain language so the LLM grounds correctly
+    # --- Interpret momentum signals in plain language so the LLM grounds correctly ---
     rsi_val = metrics['rsi_14']
     rsi_signal = "OVERBOUGHT (bearish)" if rsi_val > 70 else ("OVERSOLD (bullish)" if rsi_val < 30 else "NEUTRAL")
     macd_signal = "BULLISH momentum" if metrics['macd_histogram'] > 0 else "BEARISH momentum"
     rel_mom = metrics['relative_momentum_vs_ftse']
     rel_signal = "N/A" if rel_mom is None else ("OUTPERFORMING FTSE" if rel_mom > 0 else "UNDERPERFORMING FTSE")
+
+    # --- Tally the signals into an overall directional lean ---
+    # Note: OVERSOLD is bullish, OVERBOUGHT is bearish — handled explicitly below
+    signals = [rsi_signal, macd_signal, rel_signal]
+    bullish = sum(('BULLISH' in s or 'OUTPERFORM' in s or 'OVERSOLD' in s) for s in signals)
+    bearish = sum(('BEARISH' in s or 'UNDERPERFORM' in s or 'OVERBOUGHT' in s) for s in signals)
+    quant_lean = "BULLISH" if bullish > bearish else ("BEARISH" if bearish > bullish else "MIXED")
 
     quant_argument = (f"Quant Findings (Round {current_round}):\n"
                       f"Volatility (Daily Std Dev): {metrics['volatility']}\n"
@@ -81,7 +88,8 @@ def quantitative_specialist_node(state: AgentState):
                       f"Mean Daily Return: {metrics['mean_daily_return']}\n"
                       f"RSI (14-day): {metrics['rsi_14']} → {rsi_signal}\n"
                       f"MACD Histogram: {metrics['macd_histogram']} → {macd_signal}\n"
-                      f"Relative Momentum vs FTSE 100: {rel_mom} → {rel_signal}")
+                      f"Relative Momentum vs FTSE 100: {rel_mom} → {rel_signal}\n"
+                      f"➤ OVERALL QUANT LEAN: {quant_lean} ({bullish} bullish vs {bearish} bearish signals)")
 
     new_message = AIMessage(content=quant_argument)
 
