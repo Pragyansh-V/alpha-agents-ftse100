@@ -1,0 +1,14 @@
+{
+    "run_name": "Run2_llama-3.3-70b-versatile_T0.0_5Assets",
+    "strategy": {
+        "total_return": -0.05268229346631503,
+        "sharpe": -2.5067859376325776,
+        "max_drawdown": -0.07738356945933555
+    },
+    "benchmark": {
+        "total_return": 0.11721110652374023,
+        "sharpe": 1.8747812612828023,
+        "max_drawdown": -0.07484043870381822
+    },
+    "shorting_enabled": true
+}
