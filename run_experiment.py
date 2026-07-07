@@ -51,8 +51,11 @@ def execute_experiment(model_name, temperature, ticker_count, run_name):
 
         # 7. Execute Portfolio Backtest (Sharpe, MDD, vs Buy-and-Hold)
         print("\n📈 Executing Portfolio Backtest...")
-        subprocess.run(["python", "backtest.py"], check=True)
-        mlflow.log_artifact(f"results/{run_name}_backtest.json")
+        try:
+            subprocess.run(["python", "backtest.py"], check=True)
+            mlflow.log_artifact(f"results/{run_name}_backtest.json")
+        except Exception as e:
+            print(f"⚠️ Backtest step failed (swarm results still saved): {e}")
         
         print(f"\n✅ Experiment Logged Successfully. Accuracy: {accuracy}%")
 
