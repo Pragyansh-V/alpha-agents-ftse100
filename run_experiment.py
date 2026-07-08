@@ -61,13 +61,13 @@ def execute_experiment(model_name, temperature, ticker_count, run_name):
 
 if __name__ == "__main__":
     MODEL = "llama-3.3-70b-versatile"
-    TEMP = 0.0
+    TEMP = 0.5
     TICKERS = 5
 
     os.environ["EXPERIMENT_MODEL"] = MODEL
     os.environ["EXPERIMENT_TEMP"] = str(TEMP)
 
 
-    RUN_NAME = f"Run2_{MODEL}_T{TEMP}_{TICKERS}Assets"
+    RUN_NAME = f"Run3_{MODEL}_T{TEMP}_{TICKERS}Assets"
     os.environ["RUN_NAME"] = RUN_NAME
     execute_experiment(MODEL, TEMP, TICKERS, RUN_NAME) 
