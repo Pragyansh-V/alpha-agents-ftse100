@@ -28,28 +28,22 @@ Single-agent LLM systems in financial contexts suffer from two structural failur
 
 Four specialised agents communicate via a **LangGraph stateful DAG** using a Round Robin debate protocol with a clock-gated router:
 
-┌──────────────────────────────────────────────────────────┐
-│                    LangGraph DAG                         │
-│                                                          │
-│   ┌─────────┐     ┌──────────────┐                       │
-│   │  Quant  │────▶│ Fundamental  │                       │
-│   │Specialist│    │   Analyst    │                       │
-│   └─────────┘     └──────┬───────┘                       │
-│        ▲                 │                               │
-│        │          ┌──────▼───────┐                       │
-│        └──────────│    Router    │                       │
-│     (if round<3)  │  (Clock Gate)│                       │
-│                   └──────┬───────┘                       │
-│                   (if round≥3)                           │
-│                   ┌──────▼───────┐                       │
-│                   │  Portfolio   │                       │
-│                   │   Manager   │                        │
-│                   └──────┬───────┘                       │
-│                   ┌──────▼───────┐                       │
-│                   │  XAI Auditor │                       │
-│                   │ (EU AI Act)  │                       │
-│                   └──────────────┘                       │
-└──────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    START([Start: Ticker Input]) --> QS[🔢 Quant Specialist<br/>Volatility · RSI · MACD<br/>Relative Momentum · Quant Lean]
+    QS --> FA[📖 Fundamental Analyst<br/>Round 1: RAG-Grounded Critique<br/>Round 2: Devil's Advocate]
+    FA --> ROUTER{🚦 Router<br/>Clock Gate}
+    ROUTER -->|round < 3| QS
+    ROUTER -->|round ≥ 3| PM[💼 Portfolio Manager<br/>Scarcity-Constrained Synthesis<br/>FINAL_DECISION: BUY/HOLD/SELL]
+    PM --> XAI[⚖️ XAI Auditor<br/>EU AI Act Art. 13 & 14<br/>Transparency Verdict]
+    XAI --> END([End: Decision + Audit Trail])
+
+    style QS fill:#1a1a2e,stroke:#e94560,color:#fff
+    style FA fill:#1a1a2e,stroke:#0f3460,color:#fff
+    style ROUTER fill:#16213e,stroke:#e94560,color:#fff
+    style PM fill:#1a1a2e,stroke:#00b4d8,color:#fff
+    style XAI fill:#1a1a2e,stroke:#52b788,color:#fff
+```
 
 ### Agent Roles
 
