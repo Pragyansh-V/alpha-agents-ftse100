@@ -1,6 +1,6 @@
 # Alpha-Agents FTSE 100: Multi-Agent LLM Portfolio Management
 
-**MSc Artificial Intelligence Dissertation — Heriot-Watt University, Edinburgh (2026)**
+**MSc Artificial Intelligence Dissertation Heriot-Watt University, Edinburgh (2026)**
 
 **Author:** Pragyansh Vardhan
 **Supervisor:** Rob Stewart
@@ -15,14 +15,14 @@
 
 A multi-agent LLM system that generates **BUY / HOLD / SELL** investment decisions for FTSE 100 equities. The system extends the AlphaAgents framework (Wang et al., 2025) from the S&P 500 to the UK market, with EU AI Act compliance (Article 13 Transparency, Article 14 Human Oversight) built into the architecture via an explainable audit layer.
 
-The core contribution is empirical: a controlled 5-experiment matrix demonstrating that **model scale does not determine decision quality** — a well-constrained 8B model consistently outperformed a 70B model on both classification accuracy and risk-adjusted portfolio return (Sharpe Ratio).
+The core contribution is empirical: a controlled 5-experiment matrix demonstrating that **model scale does not determine decision quality** a well-constrained 8B model consistently outperformed a 70B model on both classification accuracy and risk-adjusted portfolio return (Sharpe Ratio).
 
 ## The Problem
 
 Single-agent LLM systems in financial contexts suffer from two structural failures:
 
-1. **Hallucination without accountability** — a single model can fabricate financial reasoning with no internal challenge mechanism, producing decisions that are unauditable under the EU AI Act and FCA operational resilience standards.
-2. **The "bigger is better" assumption** — practitioners default to the largest available model, assuming more parameters produce better financial judgment. This assumption is untested for constrained decision tasks with structured inputs.
+1. **Hallucination without accountability**  a single model can fabricate financial reasoning with no internal challenge mechanism, producing decisions that are unauditable under the EU AI Act and FCA operational resilience standards.
+2. **The "bigger is better" assumption**  practitioners default to the largest available model, assuming more parameters produce better financial judgment. This assumption is untested for constrained decision tasks with structured inputs.
 
 ## Architecture
 
@@ -64,8 +64,8 @@ Four specialised agents communicate via a **LangGraph stateful DAG** using a Rou
 
 - **Adversarial Debate Protocol:** Round 1 presents the standard fundamental thesis; Round 2 explicitly challenges it via a Devil's Advocate prompt, forcing the Portfolio Manager to adjudicate between genuinely opposing arguments rather than rubber-stamping a single perspective.
 - **Clock-Gated Router:** The `debate_round` counter (owned solely by the Analyst node) prevents infinite loops while ensuring exactly 2 full debate cycles per ticker before routing to the Portfolio Manager.
-- **Momentum-Enriched Quant Layer:** RSI, MACD, and FTSE-relative momentum signals are computed deterministically in Python and translated into plain-language interpretations (e.g., "OVERBOUGHT (bearish)") before entering the LLM context — removing a reasoning step the smaller model would otherwise fumble.
-- **Single Source of Truth:** Model name and temperature are set once in `run_experiment.py` and propagated via environment variables to all agent files — eliminating config-drift bugs across the multi-file architecture.
+- **Momentum-Enriched Quant Layer:** RSI, MACD, and FTSE-relative momentum signals are computed deterministically in Python and translated into plain-language interpretations (e.g., "OVERBOUGHT (bearish)") before entering the LLM context  removing a reasoning step the smaller model would otherwise fumble.
+- **Single Source of Truth:** Model name and temperature are set once in `run_experiment.py` and propagated via environment variables to all agent files  eliminating config-drift bugs across the multi-file architecture.
 
 ## Tech Stack
 
@@ -85,11 +85,11 @@ A 5-experiment matrix varying **model scale** (8B vs 70B) and **sampling tempera
 
 | Run | Model | Temp (T) | Research Goal |
 |---|---|---|---|
-| 1 | `llama-3.3-70b-versatile` | 0.2 | **Gold Standard Baseline** — peak 70B performance under controlled conditions |
-| 2 | `llama-3.3-70b-versatile` | 0.0 | **Deterministic Trap** — does greedy decoding cause brittleness? |
-| 3 | `llama-3.3-70b-versatile` | 0.5 | **Creative Threshold** — does increased variance promote insight or noise? |
-| 4 | `llama-3.1-8b-instant` | 0.2 | **Efficiency Baseline** — can 8B match 70B accuracy? |
-| 5 | `llama-3.1-8b-instant` | 0.0 | **Minimalist Logic Test** — 8B capability for pure logical processing |
+| 1 | `llama-3.3-70b-versatile` | 0.2 | **Gold Standard Baseline**  peak 70B performance under controlled conditions |
+| 2 | `llama-3.3-70b-versatile` | 0.0 | **Deterministic Trap**  does greedy decoding cause brittleness? |
+| 3 | `llama-3.3-70b-versatile` | 0.5 | **Creative Threshold**  does increased variance promote insight or noise? |
+| 4 | `llama-3.1-8b-instant` | 0.2 | **Efficiency Baseline**  can 8B match 70B accuracy? |
+| 5 | `llama-3.1-8b-instant` | 0.0 | **Minimalist Logic Test**  8B capability for pure logical processing |
 
 ### Evaluation Tickers
 
@@ -122,7 +122,7 @@ A 5-experiment matrix varying **model scale** (8B vs 70B) and **sampling tempera
 | 3 | 70B | 0.5 | −1.481 | −0.84% | −2.72% |
 | **4** | **8B** | **0.2** | **2.642** | **+10.77%** | **−4.08%** |
 | **5** | **8B** | **0.0** | **2.485** | **+10.55%** | **−4.96%** |
-| — | Benchmark | — | ~1.57 | ~10.0% | ~−7.48% |
+|  | Benchmark |  | ~1.57 | ~10.0% | ~−7.48% |
 
 ### Key Findings
 
@@ -132,7 +132,7 @@ A 5-experiment matrix varying **model scale** (8B vs 70B) and **sampling tempera
 
 3. **The 70B model exhibited three distinct, temperature-specific failure modes:** confidently-wrong directional inversion at T=0.0, cautious-but-wrong positioning at T=0.2, and near-total decision paralysis at T=0.5. No temperature setting rescued the 70B model, suggesting the problem is structural, not tunable.
 
-4. **Risk-adjusted return (Sharpe) reveals what accuracy hides.** A naive all-BUY strategy achieved 60% accuracy on this ticker set but produced zero alpha over the buy-and-hold benchmark. The fixed pipeline's selective capital allocation achieved the same 60% accuracy while generating genuine risk-adjusted alpha (Sharpe 2.64 vs benchmark 1.57) — a distinction only visible through the portfolio backtest.
+4. **Risk-adjusted return (Sharpe) reveals what accuracy hides.** A naive all-BUY strategy achieved 60% accuracy on this ticker set but produced zero alpha over the buy-and-hold benchmark. The fixed pipeline's selective capital allocation achieved the same 60% accuracy while generating genuine risk-adjusted alpha (Sharpe 2.64 vs benchmark 1.57)  a distinction only visible through the portfolio backtest.
 
 ## Project Structure
 
