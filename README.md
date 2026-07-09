@@ -45,6 +45,73 @@ flowchart TD
     style XAI fill:#1a1a2e,stroke:#52b788,color:#fff
 ```
 
+### Data Pipeline
+
+```mermaid
+flowchart LR
+    subgraph DATA_INGESTION["Data Ingestion"]
+        YF["yfinance API"] -->|"Price History 365d"| QUANT_DATA[("Quant Metrics")]
+        YF -->|".info fields"| RAG_DOCS["Financial Reports .txt"]
+        FTSE["yfinance FTSE Index"] -->|"Index Prices"| QUANT_DATA
+    end
+    subgraph RAG_PIPELINE["RAG Pipeline"]
+        RAG_DOCS -->|"TextLoader"| SPLIT["RecursiveCharacterTextSplitter<br/>chunk: 500, overlap: 50"]
+        SPLIT -->|"all-MiniLM-L6-v2"| EMBED["HuggingFace Embeddings"]
+        EMBED --> FAISS[("FAISS Index<br/>29 chunks")]
+    end
+    subgraph DEBATE["Multi-Agent Debate"]
+        QUANT_DATA --> QS["Quant Specialist"]
+        FAISS -->|"similarity_search k=1"| FA["Fundamental Analyst"]
+        QS --> FA
+        FA -->|"2 rounds"| PM["Portfolio Manager"]
+        PM --> XAI["XAI Auditor"]
+    end
+    subgraph EVALUATION["Evaluation"]
+        XAI -->|"BUY/HOLD/SELL"| GT["Ground Truth<br/>3-month forward return<br/>threshold: +/-5%"]
+        XAI -->|"Position weights"| BT["Portfolio Backtest<br/>Sharpe, MDD, Return<br/>vs Buy-and-Hold"]
+        GT --> MLFLOW[("MLflow")]
+        BT --> MLFLOW
+    end
+    style DATA_INGESTION fill:#0d1117,stroke:#30363d,color:#c9d1d9
+    style RAG_PIPELINE fill:#0d1117,stroke:#30363d,color:#c9d1d9
+    style DEBATE fill:#0d1117,stroke:#30363d,color:#c9d1d9
+    style EVALUATION fill:#0d1117,stroke:#30363d,color:#c9d1d9
+```
+
+### Evaluation Protocol
+
+```mermaid
+flowchart TD
+    subgraph GROUND_TRUTH["Classification Evaluation"]
+        DECISION["Swarm Decision: BUY / HOLD / SELL"] --> COMPARE{"Compare vs 3-month actual return"}
+        COMPARE -->|"return greater than +5%"| GT_BUY["Ground Truth: BUY"]
+        COMPARE -->|"return less than -5%"| GT_SELL["Ground Truth: SELL"]
+        COMPARE -->|"return between -5% and +5%"| GT_HOLD["Ground Truth: HOLD"]
+        GT_BUY --> MATCH{"Exact Match?"}
+        GT_SELL --> MATCH
+        GT_HOLD --> MATCH
+        MATCH -->|Yes| PASS["PASS: +2 pts"]
+        MATCH -->|No| DIR{"Directional Credit?"}
+        DIR -->|"Right direction, wrong intensity"| PARTIAL["Partial: +1 pt"]
+        DIR -->|"Wrong direction"| FAIL["FAIL: 0 pts"]
+    end
+
+    subgraph BACKTEST["Portfolio Backtest"]
+        BUY_POS["BUY: Position +1 Long"] --> PORTFOLIO
+        HOLD_POS["HOLD: Position 0 Flat"] --> PORTFOLIO
+        SELL_POS["SELL: Position -1 Short"] --> PORTFOLIO
+        PORTFOLIO["Equal-Weighted Daily Returns"] --> SHARPE["Sharpe Ratio, Rf = 4.5%"]
+        PORTFOLIO --> MDD["Max Drawdown, Peak-to-Trough"]
+        PORTFOLIO --> TR["Total Return vs Buy-and-Hold"]
+    end
+
+    style GROUND_TRUTH fill:#0d1117,stroke:#30363d,color:#c9d1d9
+    style BACKTEST fill:#0d1117,stroke:#30363d,color:#c9d1d9
+    style PASS fill:#1a1a2e,stroke:#52b788,color:#fff
+    style PARTIAL fill:#1a1a2e,stroke:#e9c46a,color:#fff
+    style FAIL fill:#1a1a2e,stroke:#e94560,color:#fff
+```
+
 ### Agent Roles
 
 | Agent | Role | Key Capability |
