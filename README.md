@@ -43,7 +43,7 @@ Four specialised agents communicate via a **LangGraph stateful DAG** using a Rou
 │                   (if round≥3)                           │
 │                   ┌──────▼───────┐                       │
 │                   │  Portfolio   │                       │
-│                   │   Manager   │                       │
+│                   │   Manager   │                        │
 │                   └──────┬───────┘                       │
 │                   ┌──────▼───────┐                       │
 │                   │  XAI Auditor │                       │
