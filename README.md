@@ -3,7 +3,7 @@
 **MSc Artificial Intelligence Dissertation Heriot-Watt University, Edinburgh (2026)**
 
 **Author:** Pragyansh Vardhan
-**Supervisor:** Rob Stewart
+**Supervisor:** Lilia Georgieva
 
 ---
 
