@@ -15,13 +15,13 @@ os.makedirs("results", exist_ok=True)
 def run_batch_pipeline():
     # 1. Load your evaluation dataset to pull the tickers
     if not os.path.exists(INPUT_CSV):
-        print(f"❌ Could not find {INPUT_CSV}. Please run your data generation script first.")
+        print(f"Could not find {INPUT_CSV}. Please run your data generation script first.")
         return
         
     df = pd.read_csv(INPUT_CSV)
     tickers = df['Ticker'].unique().tolist()
     
-    print(f"📋 Found {len(tickers)} unique tickers for evaluation: {tickers}")
+    print(f"Found {len(tickers)} unique tickers for evaluation: {tickers}")
     
     master_results = []
 
@@ -65,10 +65,10 @@ def run_batch_pipeline():
             }
             
             master_results.append(company_payload)
-            print(f"✅ Successfully processed {ticker} and cached in local batch memory.")
+            print(f"Successfully processed {ticker} and cached in local batch memory.")
             
         except Exception as e:
-            print(f"❌ Failed to process {ticker} due to execution runtime error: {e}")
+            print(f"Failed to process {ticker} due to execution runtime error: {e}")
             continue
         finally:
             time.sleep(2)  # spread token usage across the rolling 60s window
@@ -77,7 +77,7 @@ def run_batch_pipeline():
     with open(OUTPUT_JSON, "w") as f:
         json.dump(master_results, f, indent=4)
         
-    print(f"\n🏆 Batch processing complete! Saved {len(master_results)} assets to {OUTPUT_JSON}")
+    print(f"\nBatch processing complete! Saved {len(master_results)} assets to {OUTPUT_JSON}")
 
 if __name__ == "__main__":
     run_batch_pipeline()

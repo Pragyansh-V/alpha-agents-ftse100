@@ -6,7 +6,7 @@ def audit_faiss():
     DB_DIR = "./faiss_index"
     
     if not os.path.exists(DB_DIR):
-        print(f"❌ Error: The directory '{DB_DIR}' does not exist. Run build_vector_db.py first.")
+        print(f" Error: The directory '{DB_DIR}' does not exist. Run build_vector_db.py first.")
         return
 
     print("📂 Loading local FAISS index...")
@@ -22,12 +22,12 @@ def audit_faiss():
         docs = vector_db.similarity_search(query, k=1)
         
         print("=" * 60)
-        print(f"📊 TARGET TICKER: {ticker}")
+        print(f"TARGET TICKER: {ticker}")
         if docs:
-            print(f"📝 Document Source/Metadata: {docs.get('metadata', 'No metadata available') if hasattr(docs, 'get') else 'Available'}")
-            print(f"📖 Retrieved Content Snippet:\n{docs[0].page_content[:400]}")
+            print(f"Document Source/Metadata: {docs.get('metadata', 'No metadata available') if hasattr(docs, 'get') else 'Available'}")
+            print(f"Retrieved Content Snippet:\n{docs[0].page_content[:400]}")
         else:
-            print("❌ No matching content found in index!")
+            print(" No matching content found in index!")
         print("=" * 60 + "\n")
 
 if __name__ == "__main__":

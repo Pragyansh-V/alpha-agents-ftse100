@@ -34,7 +34,7 @@ def compute_max_drawdown(cumulative: pd.Series) -> float:
     return float(drawdowns.min())
 
 def run_backtest():
-    print("📈 Initializing Portfolio Backtest Engine...")
+    print("Initializing Portfolio Backtest Engine...")
 
     run_name = os.environ.get("RUN_NAME", "default_run")
     results_path = f"results/{run_name}.json"
@@ -42,7 +42,7 @@ def run_backtest():
         with open(results_path, "r") as f:
             data = json.load(f)
     except FileNotFoundError:
-        print(f"❌ {results_path} not found. Run the Swarm first.")
+        print(f" {results_path} not found. Run the Swarm first.")
         return
 
     # --- Build each ticker's daily strategy-return series ---
@@ -54,7 +54,7 @@ def run_backtest():
         pm_text = asset.get("portfolio_decision", "")
         match = re.search(r'FINAL_DECISION:\s*(BUY|HOLD|SELL)', pm_text, re.IGNORECASE)
         if not match:
-            print(f"⚠️ Could not parse decision for {ticker}; skipping.")
+            print(f"Could not parse decision for {ticker}; skipping.")
             continue
 
         decision = match.group(1).upper()
@@ -63,7 +63,7 @@ def run_backtest():
         try:
             hist = yf.Ticker(ticker).history(period=EVAL_PERIOD).dropna(subset=["Close"])
             if hist.empty:
-                print(f"⚠️ No market data for {ticker}; skipping.")
+                print(f"No market data for {ticker}; skipping.")
                 continue
 
             daily_stock_returns = hist["Close"].pct_change().dropna()
@@ -79,10 +79,10 @@ def run_backtest():
                 "Period_Return_%": f"{total_return * 100:.2f}%"
             })
         except Exception as e:
-            print(f"⚠️ Failed to backtest {ticker}: {e}")
+            print(f"Failed to backtest {ticker}: {e}")
 
     if not per_ticker_returns:
-        print("❌ No valid tickers to backtest.")
+        print(" No valid tickers to backtest.")
         return
 
     # --- Equal-weighted portfolio: average across all held positions daily ---
@@ -131,7 +131,7 @@ def run_backtest():
     os.makedirs("results", exist_ok=True)
     with open(f"results/{run_name}_backtest.json", "w") as f:
         json.dump(metrics, f, indent=4)
-    print(f"\n✅ Backtest metrics saved to results/{run_name}_backtest.json")
+    print(f"\nBacktest metrics saved to results/{run_name}_backtest.json")
 
 if __name__ == "__main__":
     run_backtest()

@@ -4,7 +4,7 @@ import json
 import os
 
 def execute_experiment(model_name, temperature, ticker_count, run_name):
-    print(f"🚀 Starting Experiment: {run_name}")
+    print(f"Starting Experiment: {run_name}")
     
     # 1. Initialize MLflow Run
     mlflow.set_experiment("Magnus_Financial_Swarm")
@@ -18,12 +18,12 @@ def execute_experiment(model_name, temperature, ticker_count, run_name):
         mlflow.log_param("rag_enabled", True)
         
         # 3. Execute the Swarm Pipeline
-        print("\n⚙️ Executing Autonomous Swarm...")
+        print("\nExecuting Autonomous Swarm...")
         # as arguments to run_swarm.py via argparse. 
         subprocess.run(["python", "run_swarm.py"], check=True)
         
         # 4. Execute the Ground Truth Evaluator
-        print("\n📊 Executing Ground Truth Evaluation...")
+        print("\n Executing Ground Truth Evaluation...")
         # Capture the terminal output from ground_truth.py
         result = subprocess.run(
             ["python", "ground_truth.py"], 
@@ -50,14 +50,14 @@ def execute_experiment(model_name, temperature, ticker_count, run_name):
         mlflow.log_artifact("evaluation_data.csv")
 
         # 7. Execute Portfolio Backtest (Sharpe, MDD, vs Buy-and-Hold)
-        print("\n📈 Executing Portfolio Backtest...")
+        print("\nExecuting Portfolio Backtest...")
         try:
             subprocess.run(["python", "backtest.py"], check=True)
             mlflow.log_artifact(f"results/{run_name}_backtest.json")
         except Exception as e:
-            print(f"⚠️ Backtest step failed (swarm results still saved): {e}")
+            print(f"Backtest step failed (swarm results still saved): {e}")
         
-        print(f"\n✅ Experiment Logged Successfully. Accuracy: {accuracy}%")
+        print(f"\nExperiment Logged Successfully. Accuracy: {accuracy}%")
 
 if __name__ == "__main__":
     MODEL = "llama-3.3-70b-versatile"

@@ -22,7 +22,7 @@ def grade_decision(ai_decision, ground_truth, actual_return):
     return False, 0
 
 def evaluate_swarm():
-    print("📊 Initializing JSON Ground Truth Evaluation Engine...")
+    print("Initializing JSON Ground Truth Evaluation Engine...")
 
     try:
         run_name = os.environ.get("RUN_NAME", "default_run")
@@ -30,7 +30,7 @@ def evaluate_swarm():
         with open(results_path, 'r') as f:
             data = json.load(f)
     except FileNotFoundError:
-        print(f"❌ {results_path} not found. Run the Swarm first.")
+        print(f"{results_path} not found. Run the Swarm first.")
         return
 
     results = []
@@ -44,7 +44,7 @@ def evaluate_swarm():
         match = re.search(r'FINAL_DECISION:\s*(BUY|HOLD|SELL)', pm_text, re.IGNORECASE)
 
         if not match:
-            print(f"⚠️ Could not parse strict decision for {ticker}")
+            print(f"Could not parse strict decision for {ticker}")
             continue
 
         ai_decision = match.group(1).upper()
@@ -54,7 +54,7 @@ def evaluate_swarm():
             hist_data = stock.history(period="3mo").dropna(subset=['Close'])
 
             if hist_data.empty:
-                print(f"⚠️ No market data found for {ticker}")
+                print(f"No market data found for {ticker}")
                 continue
 
             start_price = float(hist_data['Close'].iloc[0])
@@ -80,12 +80,12 @@ def evaluate_swarm():
                 "Swarm_Decision": ai_decision,
                 "Actual_Market": ground_truth,
                 "Actual_Return_%": f"{actual_return * 100:.2f}%",
-                "Graded_Result": "✅ PASS" if is_correct else "❌ FAIL",
+                "Graded_Result": "PASS" if is_correct else "FAIL",
                 "Directional": "🎯" if dir_credit == 2 else ("↗️" if dir_credit == 1 else "❌")
             })
 
         except Exception as e:
-            print(f"⚠️ Failed to evaluate {ticker}: {e}")
+            print(f"Failed to evaluate {ticker}: {e}")
 
     total = len(results)
     accuracy = (correct_predictions / total) * 100 if total > 0 else 0
@@ -94,8 +94,8 @@ def evaluate_swarm():
     print("\n🏆 --- DISSERTATION EVALUATION SUMMARY --- 🏆\n")
     df = pd.DataFrame(results)
     print(df.to_string(index=False))
-    print(f"\n🧠 Final Swarm Predictive Accuracy (exact): {accuracy:.2f}%")
-    print(f"🧭 Directional Accuracy (weighted): {directional_accuracy:.2f}%\n")
+    print(f"\nFinal Swarm Predictive Accuracy (exact): {accuracy:.2f}%")
+    print(f"Directional Accuracy (weighted): {directional_accuracy:.2f}%\n")
 
 if __name__ == "__main__":
     evaluate_swarm()

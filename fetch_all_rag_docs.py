@@ -101,10 +101,10 @@ MARKET PERFORMANCE:
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(file_content)
 
-            print(f"✅ Saved enriched RAG context for {ticker_symbol}")
+            print(f"Saved enriched RAG context for {ticker_symbol}")
 
         except Exception as e:
-            print(f"❌ Failed to fetch data for {ticker_symbol}: {e}")
+            print(f"Failed to fetch data for {ticker_symbol}: {e}")
 
 if __name__ == "__main__":
     download_rag_context()
