@@ -174,6 +174,8 @@ A 5-experiment matrix varying **model scale** (8B vs 70B) and **sampling tempera
 | **4** | **8B** | **0.2** | **60%** |
 | **5** | **8B** | **0.0** | **60%** |
 
+![Classification Accuracy](figures/fig_4_1_accuracy.png)
+
 ### Risk-Adjusted Portfolio Performance (Sharpe Ratio)
 
 | Run | Model | Temp | Sharpe | Total Return | Max Drawdown |
@@ -184,6 +186,14 @@ A 5-experiment matrix varying **model scale** (8B vs 70B) and **sampling tempera
 | **4** | **8B** | **0.2** | **2.642** | **+10.77%** | **−4.08%** |
 | **5** | **8B** | **0.0** | **2.485** | **+10.55%** | **−4.96%** |
 |  | Benchmark |  | ~1.57 | ~10.0% | ~−7.48% |
+
+![Sharpe Ratio Comparison](figures/fig_4_2_sharpe.png)
+
+### Temperature Sensitivity
+![Temperature Sensitivity](figures/fig_4_3_temperature.png)
+
+### Decision Heatmap
+![Decision Heatmap](figures/fig_4_4_heatmap.png)
 
 ### Key Findings
 
