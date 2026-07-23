@@ -212,8 +212,14 @@ alpha-agents-ftse100/
 ├── backtest.py                 # Portfolio backtester (Sharpe, MDD, vs buy-and-hold)
 ├── fetch_all_rag_docs.py       # RAG document fetcher (enriched yfinance profiles)
 ├── build_vector_db.py          # FAISS index builder
+├── generate_figures.py         # Dissertation figure generator (matplotlib)
 ├── financial_reports/          # Enriched financial profiles (.txt, 5 tickers)
 ├── results/                    # Per-experiment JSON transcripts + backtest metrics
+├── figures/                    # Dissertation figures (300 DPI)
+│   ├── fig_4_1_accuracy.png    # Classification accuracy across conditions
+│   ├── fig_4_2_sharpe.png      # Sharpe Ratio vs buy-and-hold benchmark
+│   ├── fig_4_3_temperature.png # Temperature sensitivity by model scale
+│   └── fig_4_4_heatmap.png     # Per-ticker decision heatmap
 ├── evaluation_data.csv         # Ticker list (5 FTSE 100 equities)
 ├── notebooks/                  # Exploratory data analysis
 └── mlruns/                     # MLflow experiment tracking
